@@ -7,7 +7,7 @@ int main()
 	int min = 0, max = 0, d = 0, n = 0, i = 0, j = 0;
 
 
-	// ввод кол-ва элементов, максимума и минимума
+	// РІРІРѕРґ РєРѕР»-РІР° СЌР»РµРјРµРЅС‚РѕРІ, РјР°РєСЃРёРјСѓРјР° Рё РјРёРЅРёРјСѓРјР°
 	printf("n = ");
 	scanf_s("%d", &n);
 
@@ -30,35 +30,37 @@ int main()
 	}
 
 
-	// создание массива чисел и массива номеров чисел
+	// СЃРѕР·РґР°РЅРёРµ РјР°СЃСЃРёРІР° С‡РёСЃРµР» Рё РјР°СЃСЃРёРІР° РЅРѕРјРµСЂРѕРІ С‡РёСЃРµР»
 	double* mas1 = (double*)malloc(sizeof(double) * n);
-	double* mas2 = (double*)malloc(sizeof(double) * n);
-
-	int* mas3 = (int*)malloc(sizeof(int) * n);
-	int* mas4 = (int*)malloc(sizeof(int) * n);
+	int* mas2 = (int*)malloc(sizeof(int) * n);
 
 	for (i = 0; i < n; i++)
 	{
 		a = rand();
 		b = (a / RAND_MAX) * (max - min) + min;
-		e = modf(b, &p); // разбитие на целую и дробную часть 
-		d = pow(10, 6) * modf(b, &p); //домнажвем на 10 в 6 степени 
+		e = modf(b, &p); // СЂР°Р·Р±РёС‚РёРµ РЅР° С†РµР»СѓСЋ Рё РґСЂРѕР±РЅСѓСЋ С‡Р°СЃС‚СЊ 
+		d = pow(10, 6) * modf(b, &p); //РґРѕРјРЅР°Р¶РІРµРј РЅР° 10 РІ 6 СЃС‚РµРїРµРЅРё 
 		d = abs(d);
 
 		mas1[i] = b;
-		mas2[i] = e;
-		mas3[i] = d;
-		mas4[i] = p;
+		mas2[i] = d;
+		
 	}
 
 
-	// вывод элементов
+	// РІС‹РІРѕРґ СЌР»РµРјРµРЅС‚РѕРІ
 	for (i = 0; i < n; i++)
 	{
-		if (mas3[i] <= n)
-			c -= mas1[mas3[i]]; // вычитание лишних
+		if (mas2[i] <= n)
+			c -= mas1[mas2[i]]; 
 		else
-			c += (mas4[i] + mas2[i]); // сумма всех элементов
+			c += mas1[i]; 
+			mas1[i] = 0;
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		c += mas1[i];
 	}
 
 
@@ -66,8 +68,6 @@ int main()
 
 	free(mas1);
 	free(mas2);
-	free(mas3);
-	free(mas4);
 
 	return 0;
-}
+} 
